@@ -52,7 +52,7 @@ export default function MusicPlayer() {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-50 w-11 h-11 flex items-center justify-center border border-gold/30 bg-ivory/90 backdrop-blur-sm text-brown shadow-lg hover:bg-gold/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded-full"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center border border-gold/30 bg-ivory/90 backdrop-blur-sm text-brown shadow-lg hover:bg-gold/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 rounded-full"
       aria-label={playing ? 'Pause music' : 'Play music'}
       aria-pressed={playing}
       title={loaded ? (playing ? 'Pause music' : 'Play music') : 'Place music.mp3 in public/ to enable'}
