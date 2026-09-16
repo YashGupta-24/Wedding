@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react';
 import Hero from './components/Hero';
+import Invitation from './components/Invitation';
 
 import MusicPlayer from './components/MusicPlayer';
 
 // Lazy-load below-the-fold sections
-const Invitation = lazy(() => import('./components/Invitation'));
 const DateReveal = lazy(() => import('./components/DateReveal'));
 const Celebrations = lazy(() => import('./components/Celebrations'));
 const CoupleStory = lazy(() => import('./components/CoupleStory'));
@@ -12,7 +12,6 @@ const InstagramSection = lazy(() => import('./components/InstagramSection'));
 const Countdown = lazy(() => import('./components/Countdown'));
 const ThingsToKnow = lazy(() => import('./components/ThingsToKnow'));
 const RSVP = lazy(() => import('./components/RSVP'));
-const Footer = lazy(() => import('./components/Footer'));
 
 function SectionFallback() {
   return (
@@ -37,7 +36,6 @@ export default function App() {
           <ThingsToKnow />
           <RSVP />
         </main>
-        <Footer />
       </Suspense>
       <MusicPlayer />
     </div>

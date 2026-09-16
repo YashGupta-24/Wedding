@@ -87,15 +87,15 @@ export default function Invitation() {
           custom={2}
           className="mb-8"
         >
-          <p className="text-xs sm:text-[13px] tracking-[0.25em] uppercase text-brown/50 font-sans mb-2">
+          {/* <p className="text-xs sm:text-[13px] tracking-[0.25em] uppercase text-brown/50 font-sans mb-2">
             Bride's Family
-          </p>
+          </p> */}
           <p className="font-display text-lg sm:text-xl text-brown">
-            {families.bride.mother.name}
+            Mrs. {families.bride.mother.name}
           </p>
           <p className="text-brown/40 text-xs my-1">&</p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            {families.bride.father.name}
+            Mr. {families.bride.father.name}
           </p>
         </motion.div>
 
@@ -107,7 +107,7 @@ export default function Invitation() {
           custom={3}
           className="text-xs tracking-[0.35em] uppercase text-gold font-sans mb-8"
         >
-          Cordially Invite You to the Wedding of
+          Cordially Invite You to the Wedding of their daughter
         </motion.p>
 
         {/* Couple names — large & elegant */}
@@ -137,14 +137,14 @@ export default function Invitation() {
           custom={5}
         >
           <p className="text-xs sm:text-[13px] tracking-[0.25em] uppercase text-brown/50 font-sans mb-2">
-            Groom's Family
+            Son of 
           </p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            {families.groom.mother.name}
+            Mrs. {families.groom.mother.name}
           </p>
           <p className="text-brown/40 text-xs my-1">&</p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            {families.groom.father.name}
+            Mr. {families.groom.father.name}
           </p>
         </motion.div>
       </div>

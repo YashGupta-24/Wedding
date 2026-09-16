@@ -43,6 +43,8 @@ export const wedding = {
     name: 'Rajwada',
     address:
       'Delhi Rd, Rithani West, Phase-II, Industrial Area, Rithani, Meerut, Uttar Pradesh 250103',
+    homeAddress:
+      '77, Saraswati Mandir, Suraj Kund Road, Meerut, Uttar Pradesh, 250002',
     mapUrl:
       'https://www.google.com/maps/search/?api=1&query=Rajwada+Delhi+Rd+Rithani+Meerut+Uttar+Pradesh+250103',
   },
