@@ -15,6 +15,7 @@ export const wedding = {
     },
     hashtag: '#Saarthi',
     tagline: 'A celebration of love',
+    heroIntro: 'A Celebration of Love.',
   },
 
   date: {
