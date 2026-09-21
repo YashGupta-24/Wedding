@@ -7,7 +7,6 @@ import MusicPlayer from './components/MusicPlayer';
 // Lazy-load below-the-fold sections
 const DateReveal = lazy(() => import('./components/DateReveal'));
 const Celebrations = lazy(() => import('./components/Celebrations'));
-const CoupleStory = lazy(() => import('./components/CoupleStory'));
 const InstagramSection = lazy(() => import('./components/InstagramSection'));
 const Countdown = lazy(() => import('./components/Countdown'));
 const ThingsToKnow = lazy(() => import('./components/ThingsToKnow'));
@@ -30,7 +29,6 @@ export default function App() {
           <Invitation />
           <DateReveal />
           <Celebrations />
-          <CoupleStory />
           <InstagramSection />
           <Countdown />
           <ThingsToKnow />
