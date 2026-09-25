@@ -1,80 +1,111 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CalendarHeart } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, MapPin } from 'lucide-react';
 import { wedding } from '../data/weddingData';
 
 export default function DateReveal() {
-  const [revealed, setRevealed] = useState(false);
+  const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  // 30 days of November 2026 starting on Sunday (Nov 1 is Sunday)
+  const days = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return (
     <section
-      className="relative bg-ivory-light py-20 sm:py-28 px-6"
-      aria-label="Wedding date reveal"
+      className="relative bg-ivory-light py-20 sm:py-28 px-4 sm:px-6 overflow-hidden"
+      aria-label="Save the date"
     >
-      <div className="max-w-lg mx-auto text-center">
+      <div className="max-w-md mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <CalendarHeart className="w-8 h-8 text-gold mx-auto mb-4" strokeWidth={1.2} />
-          <h2 className="font-display text-2xl sm:text-3xl text-brown mb-2">
+          {/* Section Subtitle */}
+          <p className="font-serif-caps text-xs sm:text-sm tracking-[0.35em] uppercase text-gold font-medium mb-2">
+            Mark Your Calendar
+          </p>
+
+          {/* Main Section Title */}
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-maroon mb-8 font-normal">
             Save the Date
           </h2>
-          <p className="text-brown/50 text-sm font-sans mb-8">
-            Tap below to reveal the auspicious date
-          </p>
+
+          {/* Elegant Calendar Card */}
+          <div className="relative border border-gold/30 bg-white/70 backdrop-blur-xs p-6 sm:p-8 shadow-sm">
+            {/* Corner Ornaments */}
+            <div className="absolute top-2.5 left-2.5 w-4 h-4 border-t border-l border-gold/40" />
+            <div className="absolute top-2.5 right-2.5 w-4 h-4 border-t border-r border-gold/40" />
+            <div className="absolute bottom-2.5 left-2.5 w-4 h-4 border-b border-l border-gold/40" />
+            <div className="absolute bottom-2.5 right-2.5 w-4 h-4 border-b border-r border-gold/40" />
+
+            {/* Month & Year Header */}
+            <div className="flex items-center justify-between border-b border-gold/20 pb-4 mb-6">
+              <span className="font-display text-xl sm:text-2xl text-maroon font-medium tracking-wide">
+                November
+              </span>
+              <span className="font-serif-caps text-sm tracking-[0.2em] text-gold font-semibold">
+                2026
+              </span>
+            </div>
+
+            {/* Weekday Column Headers */}
+            <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-3 text-center">
+              {daysOfWeek.map((day, idx) => (
+                <span
+                  key={idx}
+                  className="font-serif-caps text-xs font-semibold text-brown/60 tracking-wider"
+                >
+                  {day}
+                </span>
+              ))}
+            </div>
+
+            {/* 30 Days Grid */}
+            <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-sm font-sans">
+              {days.map((day) => {
+                const isWeddingDay = day === 21;
+                return (
+                  <div
+                    key={day}
+                    className="relative flex items-center justify-center aspect-square"
+                  >
+                    {isWeddingDay ? (
+                      <div
+                        className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-maroon text-white flex items-center justify-center font-bold text-sm shadow-md ring-2 ring-gold ring-offset-2 ring-offset-white cursor-default select-none"
+                        title="Wedding Day — 21 November 2026"
+                      >
+                        <span>21</span>
+                        <Heart
+                          className="absolute -top-1 -right-1 w-3.5 h-3.5 fill-gold text-gold"
+                          strokeWidth={0}
+                        />
+                      </div>
+                    ) : (
+                      <span className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-brown/70 hover:text-maroon transition-colors select-none">
+                        {day}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Subtle Divider with Gold Diamond */}
+            <div className="flex items-center justify-center gap-3 my-6">
+              <span className="w-12 h-px bg-gold/30" />
+              <span className="text-gold text-xs">✦</span>
+              <span className="w-12 h-px bg-gold/30" />
+            </div>
+
+            {/* Highlighted Event Line */}
+            <p className="font-display text-lg sm:text-xl text-maroon font-medium mb-1">
+              {wedding.date.day}, {wedding.date.display}
+            </p>
+            <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs sm:text-sm font-sans mt-1">
+              <MapPin className="w-3.5 h-3.5 text-gold" />
+              <span>{wedding.venue.name}, Meerut</span>
+            </div>
+          </div>
         </motion.div>
-
-        <motion.button
-          onClick={() => setRevealed(true)}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className={`relative inline-flex items-center justify-center px-10 py-4 border border-gold/50 text-gold font-sans text-sm tracking-[0.2em] uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory ${
-            revealed
-              ? 'bg-maroon border-maroon text-white pointer-events-none'
-              : 'hover:bg-gold/10'
-          }`}
-          aria-expanded={revealed}
-          aria-controls="date-reveal-content"
-        >
-          {revealed ? 'The Date' : 'Reveal the Date'}
-        </motion.button>
-
-        <AnimatePresence>
-          {revealed && (
-            <motion.div
-              id="date-reveal-content"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-10"
-            >
-              <div className="border border-gold/30 p-8 sm:p-12 bg-white/50">
-                <p className="text-xs tracking-[0.4em] uppercase text-gold/70 font-sans mb-4">
-                  {wedding.date.day}
-                </p>
-                <p className="font-display text-5xl sm:text-6xl text-maroon">
-                  {wedding.date.dayOfMonth}
-                </p>
-                <p className="font-display text-2xl sm:text-3xl text-brown mt-2">
-                  {wedding.date.month}
-                </p>
-                <p className="text-lg text-brown/60 font-sans mt-1">{wedding.date.year}</p>
-                <div className="flex items-center justify-center gap-3 mt-6">
-                  <span className="w-10 h-px bg-gold/30" />
-                  <span className="text-gold text-xs">✦</span>
-                  <span className="w-10 h-px bg-gold/30" />
-                </div>
-                <p className="text-sm text-brown/50 font-sans mt-4 italic">
-                  At {wedding.venue.name}, Meerut
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );

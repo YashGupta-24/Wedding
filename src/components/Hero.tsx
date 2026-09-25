@@ -95,14 +95,14 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-70% to-[#FFF9EF]/80" />
         </motion.div>
 
-        {/* ─── Layer 2: Revealed Content Behind Temple Split (Clean, crisp on ivory backdrop) ─── */}
+        {/* ─── Layer 2: Revealed Content Behind Temple Split (Clean, crisp on ivory backdrop, dead center) ─── */}
         <motion.div
           style={
             prefersReduced
               ? {}
               : { display: revealDisplay, opacity: revealOpacity, scale: revealScale, y: revealY }
           }
-          className="absolute inset-0 z-5 flex flex-col items-center justify-center px-4 text-center pointer-events-none select-none -translate-y-8 sm:-translate-y-12"
+          className="absolute inset-0 z-5 flex flex-col items-center justify-center px-4 text-center pointer-events-none select-none"
         >
           {/* Couple Names */}
           <h2
