@@ -206,7 +206,7 @@ export default function Hero() {
           </p>
 
           <h1
-            className="font-script text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] text-maroon font-normal tracking-normal my-1 sm:my-2 leading-none"
+            className="font-script text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] text-maroon font-normal tracking-normal my-1 sm:my-2 leading-none text-center justify-center"
             style={{
               textShadow:
                 '0 0 24px rgba(255, 255, 255, 1), 0 0 45px rgba(255, 255, 255, 0.95), 0 2px 14px rgba(255, 255, 255, 0.95), 0 4px 20px rgba(66, 19, 30, 0.15)',

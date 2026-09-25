@@ -40,12 +40,31 @@ export const wedding = {
     },
   },
 
+  engagementDate: {
+    iso: '2026-11-15T00:00:00+05:30',
+    display: '15 November 2026',
+    day: 'Sunday',
+    year: 2026,
+    month: 'November',
+    dayOfMonth: 15,
+  },
+
+  engagementVenue: {
+    name: 'Hotel Saffron',
+    address:
+      'South Metro Station, Post, Near Partapur Flyover, Meerut, Uttar Pradesh 250002',
+    mapUrl:
+      'https://www.google.com/maps/search/?api=1&query=Hotel+Saffron+Partapur+Flyover+Meerut+Uttar+Pradesh+250002',
+  },
+
   venue: {
     name: 'Rajwada',
     address:
       'Delhi Rd, Rithani West, Phase-II, Industrial Area, Rithani, Meerut, Uttar Pradesh 250103',
     homeAddress:
-      '77, Saraswati Mandir, Suraj Kund Road, Meerut, Uttar Pradesh, 250002',
+      '77, Suraj Kund Rd, Suraj Kund, Devi Nagar, Meerut, Uttar Pradesh 250001',
+    homeMapUrl:
+      'https://www.google.com/maps/search/?api=1&query=77+Suraj+Kund+Rd+Suraj+Kund+Devi+Nagar+Meerut+Uttar+Pradesh+250001',
     mapUrl:
       'https://www.google.com/maps/search/?api=1&query=Rajwada+Delhi+Rd+Rithani+Meerut+Uttar+Pradesh+250103',
   },
@@ -83,6 +102,45 @@ export const wedding = {
       description:
         'The sacred ceremony where two souls unite, blessed by traditions, rituals, and the love of family.',
       time: 'Auspicious Hour',
+    },
+  ],
+
+  homeEvents: [
+    {
+      id: 'haldi',
+      name: 'Haldi',
+      emoji: '🌼',
+      time: '20 November 2026',
+      subTime: 'Morning Ceremony',
+      description:
+        'A joyous morning drenched in golden turmeric, heartfelt blessings, laughter, and celebratory music.',
+    },
+    {
+      id: 'mehndi',
+      name: 'Mehendi',
+      emoji: '🌿',
+      time: '20 November 2026',
+      subTime: 'Afternoon Ceremony',
+      description:
+        'An afternoon of intricate henna art, folk melodies, and sweet moments as beautiful patterns adorn the hands.',
+    },
+    {
+      id: 'sangeet',
+      name: 'Sangeet Night',
+      emoji: '🎶',
+      time: '20 November 2026',
+      subTime: 'Evening Celebrations',
+      description:
+        'A vibrant musical evening filled with celebratory dance, music, laughter, and the togetherness of both families.',
+    },
+    {
+      id: 'festivities',
+      name: 'Festive Traditions',
+      emoji: '🪔',
+      time: '21 November 2026',
+      subTime: 'Day Celebrations',
+      description:
+        'Sacred home rituals, traditional blessings, and heartfelt moments ushering in the auspicious wedding ceremony.',
     },
   ],
 

@@ -1,11 +1,18 @@
 import { motion } from 'framer-motion';
-import { Heart, MapPin } from 'lucide-react';
+import { Heart, MapPin, Sparkles } from 'lucide-react';
 import { wedding } from '../data/weddingData';
+import type { WeddingVariant } from '../hooks/useWeddingVariant';
 
-export default function DateReveal() {
+interface DateRevealProps {
+  variant?: WeddingVariant;
+}
+
+export default function DateReveal({ variant = 'w' }: DateRevealProps) {
   const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   // 30 days of November 2026 starting on Sunday (Nov 1 is Sunday)
   const days = Array.from({ length: 30 }, (_, i) => i + 1);
+
+  const showEngagement = variant === 'ew' || variant === 'ehw';
 
   return (
     <section
@@ -63,6 +70,8 @@ export default function DateReveal() {
             <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-sm font-sans">
               {days.map((day) => {
                 const isWeddingDay = day === 21;
+                const isEngagementDay = showEngagement && day === 15;
+
                 return (
                   <div
                     key={day}
@@ -76,6 +85,17 @@ export default function DateReveal() {
                         <span>21</span>
                         <Heart
                           className="absolute -top-1 -right-1 w-3.5 h-3.5 fill-gold text-gold"
+                          strokeWidth={0}
+                        />
+                      </div>
+                    ) : isEngagementDay ? (
+                      <div
+                        className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gold text-white flex items-center justify-center font-bold text-sm shadow-md ring-2 ring-maroon/50 ring-offset-2 ring-offset-white cursor-default select-none"
+                        title="Engagement Day — 15 November 2026"
+                      >
+                        <span>15</span>
+                        <Sparkles
+                          className="absolute -top-1 -right-1 w-3.5 h-3.5 text-maroon fill-maroon"
                           strokeWidth={0}
                         />
                       </div>
@@ -96,14 +116,79 @@ export default function DateReveal() {
               <span className="w-12 h-px bg-gold/30" />
             </div>
 
-            {/* Highlighted Event Line */}
-            <p className="font-display text-lg sm:text-xl text-maroon font-medium mb-1">
-              {wedding.date.day}, {wedding.date.display}
-            </p>
-            <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs sm:text-sm font-sans mt-1">
-              <MapPin className="w-3.5 h-3.5 text-gold" />
-              <span>{wedding.venue.name}, Meerut</span>
-            </div>
+            {/* Event Highlights depending on variant */}
+            {variant === 'ew' ? (
+              <div className="space-y-4 text-center">
+                <div>
+                  <span className="font-serif-caps text-[11px] tracking-[0.22em] uppercase text-gold font-semibold block mb-0.5">
+                    Engagement
+                  </span>
+                  <p className="font-display text-base sm:text-lg text-maroon font-medium">
+                    {wedding.engagementDate.day}, {wedding.engagementDate.display}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs font-sans mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-gold" />
+                    <span>{wedding.engagementVenue.name}, Meerut</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center gap-2">
+                  <span className="w-8 h-px bg-gold/20" />
+                  <span className="text-gold/60 text-[10px]">✦</span>
+                  <span className="w-8 h-px bg-gold/20" />
+                </div>
+
+                <div>
+                  <span className="font-serif-caps text-[11px] tracking-[0.22em] uppercase text-gold font-semibold block mb-0.5">
+                    Wedding
+                  </span>
+                  <p className="font-display text-base sm:text-lg text-maroon font-medium">
+                    {wedding.date.day}, {wedding.date.display}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs font-sans mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-gold" />
+                    <span>{wedding.venue.name}, Meerut</span>
+                  </div>
+                </div>
+              </div>
+            ) : variant === 'ehw' ? (
+              <div className="space-y-3.5 text-center">
+                <div>
+                  <span className="font-serif-caps text-[11px] tracking-[0.22em] uppercase text-gold font-semibold block mb-0.5">
+                    Engagement
+                  </span>
+                  <p className="font-display text-base sm:text-lg text-maroon font-medium">
+                    {wedding.engagementDate.day}, {wedding.engagementDate.display}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center gap-2">
+                  <span className="w-8 h-px bg-gold/20" />
+                  <span className="text-gold/60 text-[10px]">✦</span>
+                  <span className="w-8 h-px bg-gold/20" />
+                </div>
+
+                <div>
+                  <span className="font-serif-caps text-[11px] tracking-[0.22em] uppercase text-gold font-semibold block mb-0.5">
+                    Wedding
+                  </span>
+                  <p className="font-display text-base sm:text-lg text-maroon font-medium">
+                    {wedding.date.day}, {wedding.date.display}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              /* Variant 'w' (Wedding only) */
+              <div>
+                <p className="font-display text-lg sm:text-xl text-maroon font-medium mb-1">
+                  {wedding.date.day}, {wedding.date.display}
+                </p>
+                <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs sm:text-sm font-sans mt-1">
+                  <MapPin className="w-3.5 h-3.5 text-gold" />
+                  <span>{wedding.venue.name}, Meerut</span>
+                </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>
