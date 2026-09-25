@@ -31,8 +31,11 @@ export default function MusicPlayer() {
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
 
-    // List of real user gestures accepted by Chrome / Safari / Firefox
-    const gestureEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
+    // Real user gestures accepted by Chrome / Safari / Firefox.
+    // touchend is critical for iOS Safari (it treats touchend—not touchstart—as the
+    // canonical "tap" gesture that unlocks audio). scroll is included so that the
+    // very first scroll on mobile also tries to resume playback.
+    const gestureEvents = ['pointerdown', 'touchstart', 'touchend', 'click', 'keydown', 'scroll'];
 
     const removeGestureListeners = () => {
       gestureEvents.forEach((evt) => {
