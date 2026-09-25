@@ -1,6 +1,9 @@
 // ─── Wedding Data ────────────────────────────────────────────────────────────
 // Central data store for the entire wedding invitation website.
 
+export type WeddingSide = 'b' | 'g';
+export type WeddingVariant = 'w' | 'ew' | 'ehw';
+
 export const wedding = {
   couple: {
     bride: {
@@ -16,6 +19,79 @@ export const wedding = {
     hashtag: '#Saarthi',
     tagline: 'A celebration of love',
     heroIntro: 'A Celebration of Love.',
+  },
+
+  sides: {
+    b: {
+      key: 'b',
+      title: 'Bride Side',
+      primaryPerson: {
+        firstName: 'Sanchi',
+        lastName: 'Gupta',
+        fullName: 'Sanchi Gupta',
+      },
+      secondaryPerson: {
+        firstName: 'Sarthak',
+        lastName: 'Kaushik',
+        fullName: 'Sarthak Kaushik',
+      },
+      hostParents: {
+        mother: 'Mrs. Chanchal Gupta',
+        father: 'Mr. Sanjeev Gupta',
+        invitationText: 'Cordially Invite You to the Wedding of their daughter',
+      },
+      otherParents: {
+        relationText: 'Son of',
+        mother: 'Mrs. Geetanjali Kaushik',
+        father: 'Mr. Satendra Kaushik',
+      },
+      homeAddress:
+        '77, Suraj Kund Rd, Suraj Kund, Devi Nagar, Meerut, Uttar Pradesh 250001',
+      homeMapUrl:
+        'https://www.google.com/maps/search/?api=1&query=77+Suraj+Kund+Rd+Suraj+Kund+Devi+Nagar+Meerut+Uttar+Pradesh+250001',
+      contact: {
+        phones: ['9719027727', '9457905097'],
+      },
+      rsvp: {
+        family: 'The Gupta Family',
+        closingLine: 'with love',
+      },
+    },
+    g: {
+      key: 'g',
+      title: 'Groom Side',
+      primaryPerson: {
+        firstName: 'Sarthak',
+        lastName: 'Kaushik',
+        fullName: 'Sarthak Kaushik',
+      },
+      secondaryPerson: {
+        firstName: 'Sanchi',
+        lastName: 'Gupta',
+        fullName: 'Sanchi Gupta',
+      },
+      hostParents: {
+        mother: 'Mrs. Geetanjali Kaushik',
+        father: 'Mr. Satendra Kaushik',
+        invitationText: 'Cordially Invite You to the Wedding of their son',
+      },
+      otherParents: {
+        relationText: 'Daughter of',
+        mother: 'Mrs. Chanchal Gupta',
+        father: 'Mr. Sanjeev Gupta',
+      },
+      homeAddress:
+        '193/1, Nehru Nagar, Meerut, Uttar Pradesh',
+      homeMapUrl:
+        'https://maps.app.goo.gl/wPZcEtpkffnC5MBD8?g_st=aw',
+      contact: {
+        phones: ['9927827232', '8479938373'],
+      },
+      rsvp: {
+        family: 'The Kaushik Family',
+        closingLine: 'with love',
+      },
+    },
   },
 
   date: {
@@ -81,10 +157,10 @@ export const wedding = {
   events: [
     {
       id: 'mehndi',
-      name: 'Mehndi',
+      name: 'Mehendi',
       emoji: '🌿',
       description:
-        'An afternoon of intricate henna art, laughter, and folk music as we adorn the bride with beautiful mehndi patterns.',
+        'An afternoon of intricate henna art, laughter, and folk music as we adorn the bride with beautiful mehendi patterns.',
       time: 'Afternoon Ceremony',
     },
     {

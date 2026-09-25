@@ -1,39 +1,94 @@
 import { useState, useEffect } from 'react';
 
+export type WeddingSide = 'b' | 'g';
 export type WeddingVariant = 'w' | 'ew' | 'ehw';
 
-function parseVariant(pathname: string, hash: string, search: string): WeddingVariant | null {
-  // 1. Check hash route (e.g. #/ehw, #/ew, #/w or #ehw, #ew, #w)
-  const hashClean = hash.replace(/^#\/?/, '').toLowerCase().trim();
-  if (hashClean === 'ehw' || hashClean === 'ew' || hashClean === 'w') {
-    return hashClean;
-  }
+export interface WeddingRoute {
+  side: WeddingSide;
+  variant: WeddingVariant;
+}
 
-  // 2. Check pathname (e.g. /ehw, /ew, /w)
-  const segments = pathname.toLowerCase().split('/').filter(Boolean);
-  for (const seg of segments) {
-    if (seg === 'ehw' || seg === 'ew' || seg === 'w') {
-      return seg;
-    }
-  }
-
-  // 3. Check search param (e.g. ?v=ehw or ?variant=ew)
-  const searchParams = new URLSearchParams(search);
-  const paramVariant = searchParams.get('v') || searchParams.get('variant');
-  if (paramVariant) {
-    const clean = paramVariant.toLowerCase().trim();
-    if (clean === 'ehw' || clean === 'ew' || clean === 'w') {
-      return clean;
-    }
-  }
-
-  // If someone just visits the base URL without a valid route / hash, show nothing
+function normalizeSide(val: string | null | undefined): WeddingSide | null {
+  if (!val) return null;
+  const clean = val.toLowerCase().trim();
+  if (clean === 'b' || clean === 'bride') return 'b';
+  if (clean === 'g' || clean === 'groom') return 'g';
   return null;
 }
 
-export function useWeddingVariant(): WeddingVariant | null {
-  const [variant, setVariant] = useState<WeddingVariant | null>(() =>
-    parseVariant(
+function normalizeVariant(val: string | null | undefined): WeddingVariant | null {
+  if (!val) return null;
+  const clean = val.toLowerCase().trim();
+  if (clean === 'ehw' || clean === 'ew' || clean === 'w') return clean;
+  return null;
+}
+
+function extractSideAndVariant(segments: string[]): WeddingRoute | null {
+  let detectedSide: WeddingSide | null = null;
+  let detectedVariant: WeddingVariant | null = null;
+
+  for (const seg of segments) {
+    const side = normalizeSide(seg);
+    if (side && !detectedSide) {
+      detectedSide = side;
+      continue;
+    }
+    const variant = normalizeVariant(seg);
+    if (variant && !detectedVariant) {
+      detectedVariant = variant;
+      continue;
+    }
+  }
+
+  // If a side is detected (e.g. /b, /g, /b/w, /g/ehw)
+  if (detectedSide) {
+    return {
+      side: detectedSide,
+      variant: detectedVariant || 'ehw', // Defaults to full invite if variant is omitted
+    };
+  }
+
+  return null;
+}
+
+export function parseWeddingRoute(
+  pathname: string,
+  hash: string,
+  search: string
+): WeddingRoute | null {
+  // 1. Check hash route (e.g. #/b/ehw, #/g/w, #b, #g)
+  const hashClean = hash.replace(/^#\/?/, '').toLowerCase().trim();
+  if (hashClean) {
+    const hashSegments = hashClean.split('/').filter(Boolean);
+    const hashResult = extractSideAndVariant(hashSegments);
+    if (hashResult) return hashResult;
+  }
+
+  // 2. Check query params (e.g. ?side=b&variant=ehw, ?s=g&v=w, ?side=b, ?side=g)
+  const searchParams = new URLSearchParams(search);
+  const paramSide = searchParams.get('side') || searchParams.get('s');
+  const paramVariant = searchParams.get('variant') || searchParams.get('v');
+  const side = normalizeSide(paramSide);
+  const variant = normalizeVariant(paramVariant);
+  if (side) {
+    return {
+      side,
+      variant: variant || 'ehw',
+    };
+  }
+
+  // 3. Check pathname (e.g. /b/ehw, /g/w, /b, /g, /Wedding/b/ehw)
+  const segments = pathname.toLowerCase().split('/').filter(Boolean);
+  const pathResult = extractSideAndVariant(segments);
+  if (pathResult) return pathResult;
+
+  // Only the base URL without any side renders 404
+  return null;
+}
+
+export function useWeddingRoute(): WeddingRoute | null {
+  const [route, setRoute] = useState<WeddingRoute | null>(() =>
+    parseWeddingRoute(
       typeof window !== 'undefined' ? window.location.pathname : '',
       typeof window !== 'undefined' ? window.location.hash : '',
       typeof window !== 'undefined' ? window.location.search : ''
@@ -42,8 +97,8 @@ export function useWeddingVariant(): WeddingVariant | null {
 
   useEffect(() => {
     const handleLocationChange = () => {
-      setVariant(
-        parseVariant(window.location.pathname, window.location.hash, window.location.search)
+      setRoute(
+        parseWeddingRoute(window.location.pathname, window.location.hash, window.location.search)
       );
     };
 
@@ -56,5 +111,11 @@ export function useWeddingVariant(): WeddingVariant | null {
     };
   }, []);
 
-  return variant;
+  return route;
+}
+
+// Backwards-compatible hook
+export function useWeddingVariant(): WeddingVariant | null {
+  const route = useWeddingRoute();
+  return route ? route.variant : null;
 }

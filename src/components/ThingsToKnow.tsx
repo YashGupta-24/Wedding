@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Bell, Home } from 'lucide-react';
 import { wedding } from '../data/weddingData';
-import type { WeddingVariant } from '../hooks/useWeddingVariant';
+import type { WeddingSide, WeddingVariant } from '../hooks/useWeddingVariant';
 
 interface ThingsToKnowProps {
+  side?: WeddingSide;
   variant?: WeddingVariant;
 }
 
@@ -16,7 +17,9 @@ const cardVariants = {
   }),
 };
 
-export default function ThingsToKnow({ variant = 'w' }: ThingsToKnowProps) {
+export default function ThingsToKnow({ side = 'b', variant = 'w' }: ThingsToKnowProps) {
+  const sideData = wedding.sides[side];
+
   const contactCard = {
     id: 'contact',
     icon: Phone,
@@ -26,7 +29,7 @@ export default function ThingsToKnow({ variant = 'w' }: ThingsToKnowProps) {
         <p className="text-brown/60 text-sm font-sans mb-3">
           For any queries, feel free to reach out
         </p>
-        {wedding.contact.phones.map((phone) => (
+        {sideData.contact.phones.map((phone) => (
           <a
             key={phone}
             href={`tel:+91${phone}`}
@@ -91,10 +94,10 @@ export default function ThingsToKnow({ variant = 'w' }: ThingsToKnowProps) {
       <>
         <p className="font-display text-base text-brown mb-2">Our Residence</p>
         <p className="text-brown/60 text-sm font-sans leading-relaxed">
-          {wedding.venue.homeAddress}
+          {sideData.homeAddress}
         </p>
         <a
-          href={wedding.venue.homeMapUrl}
+          href={sideData.homeMapUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-4 text-xs tracking-[0.2em] uppercase text-gold border-b border-gold/30 pb-px hover:border-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"

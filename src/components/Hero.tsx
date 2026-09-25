@@ -3,10 +3,16 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { wedding } from '../data/weddingData';
+import type { WeddingSide } from '../hooks/useWeddingVariant';
 
-export default function Hero() {
+interface HeroProps {
+  side?: WeddingSide;
+}
+
+export default function Hero({ side = 'b' }: HeroProps) {
   const containerRef = useRef<HTMLElement>(null);
   const prefersReduced = useReducedMotion();
+  const sideData = wedding.sides[side];
 
   // Track scroll progress strictly across the sticky pinned scroll distance (0.0 to 1.0)
   const { scrollYProgress } = useScroll({
@@ -112,7 +118,7 @@ export default function Hero() {
                 '0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.95), 0 2px 12px rgba(255, 255, 255, 0.95), 0 4px 24px rgba(66, 19, 30, 0.12)',
             }}
           >
-            {wedding.couple.bride.firstName}
+            {sideData.primaryPerson.firstName}
             <span
               className="block font-script text-3xl sm:text-5xl md:text-6xl text-gold my-0.5 sm:my-1.5 font-normal tracking-normal lowercase"
               style={{
@@ -122,7 +128,7 @@ export default function Hero() {
             >
               weds
             </span>
-            {wedding.couple.groom.firstName}
+            {sideData.secondaryPerson.firstName}
           </h2>
 
           {/* Auspicious Date */}

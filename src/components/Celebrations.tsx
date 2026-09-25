@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Home } from 'lucide-react';
 import { wedding } from '../data/weddingData';
+import type { WeddingSide } from '../hooks/useWeddingVariant';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -11,7 +12,13 @@ const cardVariants = {
   }),
 };
 
-export default function Celebrations() {
+interface CelebrationsProps {
+  side?: WeddingSide;
+}
+
+export default function Celebrations({ side = 'b' }: CelebrationsProps) {
+  const sideData = wedding.sides[side];
+
   return (
     <section
       className="relative bg-maroon py-20 sm:py-28 px-4 sm:px-6 overflow-hidden"
@@ -103,10 +110,10 @@ export default function Celebrations() {
               </span>
             </div>
             <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed">
-              {wedding.venue.homeAddress}
+              {sideData.homeAddress}
             </p>
             <a
-              href={wedding.venue.homeMapUrl}
+              href={sideData.homeMapUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-3 text-xs tracking-[0.2em] uppercase text-gold border-b border-gold/40 pb-0.5 hover:text-white hover:border-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"

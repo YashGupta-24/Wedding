@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { wedding } from '../data/weddingData';
+import type { WeddingSide } from '../hooks/useWeddingVariant';
 
-export default function RSVP() {
+interface RSVPProps {
+  side?: WeddingSide;
+}
+
+export default function RSVP({ side = 'b' }: RSVPProps) {
+  const sideData = wedding.sides[side];
+
   return (
     <section
       className="relative bg-maroon py-20 sm:py-28 px-6 overflow-hidden"
@@ -22,7 +29,7 @@ export default function RSVP() {
             RSVP
           </p>
           <h2 className="font-display text-3xl sm:text-4xl text-white mb-6">
-            {wedding.rsvp.family}
+            {sideData.rsvp.family}
           </h2>
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="w-10 h-px bg-gold/30" />
@@ -30,7 +37,7 @@ export default function RSVP() {
             <span className="w-10 h-px bg-gold/30" />
           </div>
           <p className="font-sans italic text-white/60 text-lg">
-            {wedding.rsvp.closingLine}
+            {sideData.rsvp.closingLine}
           </p>
         </motion.div>
       </div>

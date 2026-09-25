@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { wedding } from '../data/weddingData';
+import type { WeddingSide } from '../hooks/useWeddingVariant';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -10,8 +11,13 @@ const fadeUp = {
   }),
 };
 
-export default function Invitation() {
-  const { families, couple } = wedding;
+interface InvitationProps {
+  side?: WeddingSide;
+}
+
+export default function Invitation({ side = 'b' }: InvitationProps) {
+  const sideData = wedding.sides[side];
+  const { hostParents, otherParents, primaryPerson, secondaryPerson } = sideData;
 
   return (
     <section
@@ -78,7 +84,7 @@ export default function Invitation() {
           <span className="w-16 h-px bg-gold/40" />
         </motion.div>
 
-        {/* Family names */}
+        {/* Host Family names */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -87,15 +93,12 @@ export default function Invitation() {
           custom={2}
           className="mb-8"
         >
-          {/* <p className="text-xs sm:text-[13px] tracking-[0.25em] uppercase text-brown/50 font-sans mb-2">
-            Bride's Family
-          </p> */}
           <p className="font-display text-lg sm:text-xl text-brown">
-            Mrs. {families.bride.mother.name}
+            {hostParents.mother}
           </p>
           <p className="text-brown/40 text-xs my-1">&</p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            Mr. {families.bride.father.name}
+            {hostParents.father}
           </p>
         </motion.div>
 
@@ -107,7 +110,7 @@ export default function Invitation() {
           custom={3}
           className="text-xs tracking-[0.35em] uppercase text-gold font-sans mb-8"
         >
-          Cordially Invite You to the Wedding of their daughter
+          {hostParents.invitationText}
         </motion.p>
 
         {/* Couple names — large & elegant */}
@@ -120,15 +123,15 @@ export default function Invitation() {
           className="mb-10"
         >
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-maroon leading-tight">
-            {couple.bride.firstName}
+            {primaryPerson.firstName}
           </h2>
           <p className="font-sans italic text-gold text-lg sm:text-xl my-2">&</p>
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-maroon leading-tight">
-            {couple.groom.firstName}
+            {secondaryPerson.firstName}
           </h2>
         </motion.div>
 
-        {/* Groom's family */}
+        {/* Other family */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -137,14 +140,14 @@ export default function Invitation() {
           custom={5}
         >
           <p className="text-xs sm:text-[13px] tracking-[0.25em] uppercase text-brown/50 font-sans mb-2">
-            Son of 
+            {otherParents.relationText}
           </p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            Mrs. {families.groom.mother.name}
+            {otherParents.mother}
           </p>
           <p className="text-brown/40 text-xs my-1">&</p>
           <p className="font-display text-lg sm:text-xl text-brown">
-            Mr. {families.groom.father.name}
+            {otherParents.father}
           </p>
         </motion.div>
       </div>

@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import Hero from './components/Hero';
 import Invitation from './components/Invitation';
 import MusicPlayer from './components/MusicPlayer';
-import { useWeddingVariant } from './hooks/useWeddingVariant';
+import { useWeddingRoute } from './hooks/useWeddingVariant';
 import { wedding } from './data/weddingData';
 
 // Lazy-load below-the-fold sections
@@ -22,10 +22,10 @@ function SectionFallback() {
 }
 
 export default function App() {
-  const variant = useWeddingVariant();
+  const route = useWeddingRoute();
 
   // If accessed without a valid route / hash, render the 404 message card
-  if (!variant) {
+  if (!route) {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center px-4 sm:px-6 py-12">
         <div className="relative max-w-md w-full border border-gold/40 bg-white/80 p-8 sm:p-10 text-center shadow-xs backdrop-blur-xs">
@@ -57,18 +57,20 @@ export default function App() {
     );
   }
 
+  const { side, variant } = route;
+
   return (
     <div className="min-h-screen bg-ivory">
-      <Hero />
+      <Hero side={side} />
       <Suspense fallback={<SectionFallback />}>
         <main>
-          <Invitation />
+          <Invitation side={side} />
           <DateReveal variant={variant} />
-          {variant === 'ehw' && <Celebrations />}
+          {variant === 'ehw' && <Celebrations side={side} />}
           <InstagramSection />
           <Countdown />
-          <ThingsToKnow variant={variant} />
-          <RSVP />
+          <ThingsToKnow side={side} variant={variant} />
+          <RSVP side={side} />
         </main>
       </Suspense>
       <MusicPlayer />
