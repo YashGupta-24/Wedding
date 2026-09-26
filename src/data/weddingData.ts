@@ -168,7 +168,7 @@ export const wedding = {
       name: 'Sangeet Night',
       emoji: '🎶',
       description:
-        'A vibrant evening of music, dance performances, and celebrations as both families come together in joy.',
+        'A vibrant evening of music, dance performances, and celebrations as our family come together in joy.',
       time: 'Evening Celebrations',
     },
     {
@@ -207,7 +207,7 @@ export const wedding = {
       time: '20 November 2026',
       subTime: 'Evening Celebrations',
       description:
-        'A vibrant musical evening filled with celebratory dance, music, laughter, and the togetherness of both families.',
+        'A vibrant musical evening filled with celebratory dance, music, laughter, and the togetherness of our family.',
     },
     {
       id: 'festivities',

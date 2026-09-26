@@ -30,51 +30,57 @@ export default function Hero({ side = 'b' }: HeroProps) {
   const scrollCueDisplay = useTransform(scrollYProgress, (p) => (p > 0.09 ? 'none' : 'flex'));
 
   // ─── 2. Temple Expansion ───
-  // Zooms towards the viewer during the initial scroll (0.00 -> 0.20 -> 0.75)
-  const templeScale = useTransform(scrollYProgress, [0, 0.20, 0.75], [1, 1.30, 1.85], {
+  // Zooms towards the viewer during the initial scroll (0.00 -> 0.18 -> 0.65)
+  const templeScale = useTransform(scrollYProgress, [0, 0.18, 0.65], [1, 1.25, 1.65], {
     clamp: true,
   });
 
   // ─── 3. Temple Split (Doors sliding outward) ───
-  // Starts parting at 0.20 right as enlargement completes, reaches ~10% edge margins at 0.56, fully clears screen by 0.76
+  // Starts parting at 0.18, widens by 0.48, completely clears past the viewport bezels by 0.68
   const leftDoorX = useTransform(
     scrollYProgress,
-    [0, 0.20, 0.56, 0.76, 1],
-    ['0%', '0%', '-56%', '-115%', '-115%'],
+    [0, 0.18, 0.48, 0.68, 1],
+    ['0%', '0%', '-60%', '-140%', '-140%'],
     { clamp: true }
   );
   const rightDoorX = useTransform(
     scrollYProgress,
-    [0, 0.20, 0.56, 0.76, 1],
-    ['0%', '0%', '56%', '115%', '115%'],
+    [0, 0.18, 0.48, 0.68, 1],
+    ['0%', '0%', '60%', '140%', '140%'],
     { clamp: true }
   );
 
+  // Fade out temple completely as it reaches screen edges and remove from layout
+  const templeOpacity = useTransform(scrollYProgress, [0, 0.56, 0.68, 1], [1, 1, 0, 0], {
+    clamp: true,
+  });
+  const templeDisplay = useTransform(scrollYProgress, (p) => (p > 0.69 ? 'none' : 'block'));
+
   // ─── 4. Background Sky Transition ───
-  // Fades away in sync with the split (0.20 -> 0.54) to reveal the clean light ivory background
-  const skyOpacity = useTransform(scrollYProgress, [0, 0.20, 0.54, 1], [1, 1, 0, 0], {
+  // Fades away in sync with the split (0.18 -> 0.50) to reveal the clean light ivory background
+  const skyOpacity = useTransform(scrollYProgress, [0, 0.18, 0.50, 1], [1, 1, 0, 0], {
     clamp: true,
   });
 
   // ─── 5. Revealed Couple Text ("Sanchi weds Sarthak · Date") ───
-  // Starts revealing with split (0.20), fully revealed by 0.56 (~10% edges), and STAYS PERMANENTLY VISIBLE
-  const revealDisplay = useTransform(scrollYProgress, (p) => (p < 0.18 ? 'none' : 'flex'));
+  // Starts revealing with split (0.24), fully revealed by 0.52, and STAYS PERMANENTLY VISIBLE
+  const revealDisplay = useTransform(scrollYProgress, (p) => (p < 0.20 ? 'none' : 'flex'));
   const revealOpacity = useTransform(
     scrollYProgress,
-    [0, 0.20, 0.56, 1],
+    [0, 0.24, 0.52, 1],
     [0, 0, 1, 1],
     { clamp: true }
   );
   const revealScale = useTransform(
     scrollYProgress,
-    [0, 0.20, 0.56, 1],
-    [0.88, 0.88, 1, 1],
+    [0, 0.24, 0.52, 1],
+    [0.92, 0.92, 1, 1],
     { clamp: true }
   );
   const revealY = useTransform(
     scrollYProgress,
-    [0, 0.20, 0.56, 1],
-    [30, 30, 0, 0],
+    [0, 0.24, 0.52, 1],
+    [24, 24, 0, 0],
     { clamp: true }
   );
 
@@ -155,7 +161,11 @@ export default function Hero({ side = 'b' }: HeroProps) {
 
         {/* ─── Layer 3: Sacred Temple Mandap (Scales Up & Splits Outward) ─── */}
         <motion.div
-          style={prefersReduced ? {} : { scale: templeScale }}
+          style={
+            prefersReduced
+              ? {}
+              : { scale: templeScale, opacity: templeOpacity, display: templeDisplay }
+          }
           className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[68vh] sm:h-[70vh] md:h-[72vh] lg:h-[75vh] max-h-[860px] aspect-[992/702] w-auto max-w-none origin-bottom select-none z-10"
         >
           {/* Left Door */}
