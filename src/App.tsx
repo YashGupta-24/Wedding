@@ -8,7 +8,7 @@ import { wedding } from './data/weddingData';
 // Lazy-load below-the-fold sections
 const DateReveal = lazy(() => import('./components/DateReveal'));
 const Celebrations = lazy(() => import('./components/Celebrations'));
-const InstagramSection = lazy(() => import('./components/InstagramSection'));
+// const InstagramSection = lazy(() => import('./components/InstagramSection'));
 const Countdown = lazy(() => import('./components/Countdown'));
 const ThingsToKnow = lazy(() => import('./components/ThingsToKnow'));
 const RSVP = lazy(() => import('./components/RSVP'));
