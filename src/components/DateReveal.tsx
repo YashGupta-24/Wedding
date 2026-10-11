@@ -28,12 +28,13 @@ export default function DateReveal({ variant = 'w' }: DateRevealProps) {
         >
           {/* Section Subtitle */}
           <p className="font-serif-caps text-xs sm:text-sm tracking-[0.35em] uppercase text-gold font-medium mb-2">
-            Mark Your Calendar
+            {/* Mark Your Calendar */}
+            Save it. Don't miss it.
           </p>
 
           {/* Main Section Title */}
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-maroon mb-8 font-normal">
-            Save the Date
+            Mark Your Calendar
           </h2>
 
           {/* Elegant Calendar Card */}

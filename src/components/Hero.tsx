@@ -212,7 +212,7 @@ export default function Hero({ side = 'b' }: HeroProps) {
           className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center pointer-events-none select-none -translate-y-8 sm:-translate-y-12"
         >
           <p
-            className="font-serif-caps text-xs sm:text-sm md:text-base tracking-[0.35em] uppercase text-maroon-dark font-medium mb-1 sm:mb-2"
+            className="font-serif-caps text-base tracking-[0.35em] uppercase text-maroon-dark font-medium mb-1 sm:mb-2"
             style={{
               textShadow:
                 '0 0 16px rgba(255, 255, 255, 0.95), 0 0 28px rgba(255, 255, 255, 0.85), 0 1px 4px rgba(255, 255, 255, 1)',
@@ -228,7 +228,7 @@ export default function Hero({ side = 'b' }: HeroProps) {
                 '0 0 24px rgba(255, 255, 255, 1), 0 0 45px rgba(255, 255, 255, 0.95), 0 2px 14px rgba(255, 255, 255, 0.95), 0 4px 20px rgba(66, 19, 30, 0.15)',
             }}
           >
-            {wedding.couple.hashtag}
+            {/* {wedding.couple.hashtag} */}
           </h1>
         </motion.div>
 

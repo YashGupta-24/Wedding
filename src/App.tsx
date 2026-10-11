@@ -67,7 +67,7 @@ export default function App() {
           <Invitation side={side} />
           <DateReveal variant={variant} />
           {variant === 'ehw' && <Celebrations side={side} />}
-          <InstagramSection />
+          {/* <InstagramSection /> */}
           <Countdown />
           <ThingsToKnow side={side} variant={variant} />
           <RSVP side={side} />
