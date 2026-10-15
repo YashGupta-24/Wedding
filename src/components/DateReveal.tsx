@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, MapPin, Sparkles } from 'lucide-react';
+import { Heart, MapPin, Clock, Sparkles } from 'lucide-react';
 import { wedding } from '../data/weddingData';
 import type { WeddingVariant } from '../hooks/useWeddingVariant';
 
@@ -131,7 +131,11 @@ export default function DateReveal({ variant = 'w' }: DateRevealProps) {
                     <MapPin className="w-3.5 h-3.5 text-gold" />
                     <span>{wedding.engagementVenue.name}, Meerut</span>
                   </div>
-                </div>
+                  <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs font-sans mt-0.5">
+                    <Clock className="w-3.5 h-3.5 text-gold" />
+                    <span>{wedding.engagementVenue.commenceTime}</span>
+                  </div>
+                  </div>
 
                 <div className="flex items-center justify-center gap-2">
                   <span className="w-8 h-px bg-gold/20" />
@@ -149,6 +153,10 @@ export default function DateReveal({ variant = 'w' }: DateRevealProps) {
                   <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs font-sans mt-0.5">
                     <MapPin className="w-3.5 h-3.5 text-gold" />
                     <span>{wedding.venue.name}, Meerut</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs font-sans mt-0.5">
+                    <Clock className="w-3.5 h-3.5 text-gold" />
+                    <span>{wedding.venue.commenceTime}</span>
                   </div>
                 </div>
               </div>
@@ -187,6 +195,10 @@ export default function DateReveal({ variant = 'w' }: DateRevealProps) {
                 <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs sm:text-sm font-sans mt-1">
                   <MapPin className="w-3.5 h-3.5 text-gold" />
                   <span>{wedding.venue.name}, Meerut</span>
+                </div>
+                <div className="flex items-center justify-center gap-1.5 text-brown/60 text-xs sm:text-sm font-sans mt-0.5">
+                  <Clock className="w-3.5 h-3.5 text-gold" />
+                  <span>{wedding.venue.commenceTime}</span>
                 </div>
               </div>
             )}

@@ -131,10 +131,11 @@ export const wedding = {
       'South Metro Station, Post, Near Partapur Flyover, Meerut, Uttar Pradesh 250002',
     mapUrl:
       'https://www.google.com/maps/search/?api=1&query=Hotel+Saffron+Partapur+Flyover+Meerut+Uttar+Pradesh+250002',
+    commenceTime: '6:00 PM onwards',
   },
 
   venue: {
-    name: 'Rajwada',
+    name: 'Rajwada Farm House',
     address:
       'Delhi Rd, Rithani West, Phase-II, Industrial Area, Rithani, Meerut, Uttar Pradesh 250103',
     homeAddress:
@@ -143,6 +144,7 @@ export const wedding = {
       'https://www.google.com/maps/search/?api=1&query=77+Suraj+Kund+Rd+Suraj+Kund+Devi+Nagar+Meerut+Uttar+Pradesh+250001',
     mapUrl:
       'https://www.google.com/maps/search/?api=1&query=Rajwada+Delhi+Rd+Rithani+Meerut+Uttar+Pradesh+250103',
+    commenceTime: '7:00 PM onwards',
   },
 
   contact: {
